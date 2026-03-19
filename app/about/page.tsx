@@ -112,28 +112,16 @@ export default function About() {
           <div className="space-y-8">
             <div className="space-y-4 text-base leading-relaxed" style={{ color: "#aaa" }}>
               <p>
-                I&apos;m Rizwan — a Computer Information Systems student with a Minor in Finance at Mount Royal University in Calgary.
-                I&apos;ve never been someone who just goes to class and calls it a day.
+                My name is Rizwan, a third year Computer Information Systems student at Mount Royal University in Calgary. I move fast and execute with purpose.
               </p>
               <p>
-                I founded <span className="text-white font-semibold">BCO</span> — MRU&apos;s first consulting club —
-                from scratch, secured <span className="text-white font-semibold">PwC as a corporate sponsor</span> in the inaugural semester,
-                hosted a Corporate Strategy Summit with Fortune 500 speakers, and delivered consulting engagements for 3 Calgary SMEs.
+                I founded MRU&apos;s first consulting club and built a full stack food rescue platform because I look for gaps and act on them.
               </p>
               <p>
-                I built <span className="text-white font-semibold">Faith Feeds</span>, a full-stack food rescue platform,
-                because I saw a problem and knew I could solve it. Before that, I spent over a year as a
-                <span className="text-white font-semibold"> Lead Trainer at 9Round</span>, managing 65+ clients and improving
-                customer satisfaction by 15% through operational improvements.
+                Outside of work, I take initiative where I can create impact. I have helped serve nearly 10,000 meals to Calgary&apos;s homeless community, led a food drive that collected 16,500 pounds for the Calgary Food Bank, and chaired Run for Calgary with over 400 participants.
               </p>
               <p>
-                Outside of work, I&apos;ve served 500+ meals to Calgary&apos;s homeless (covered by CTV & Global),
-                led a food drive that collected 16,500 lbs for the Calgary Food Bank — 300% more than the year before —
-                and chaired Run for Calgary with 400+ participants.
-              </p>
-              <p>
-                I&apos;m looking for a startup internship where I can hit the ground running. I work well in ambiguity,
-                I ship fast, and I genuinely care about the outcome.
+                I am looking to join a team where I can contribute immediately. I take ownership, operate well in ambiguity, and execute quickly with purpose.
               </p>
             </div>
 

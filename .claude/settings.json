@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/14039/.claude/projects/c--Users-14039--vscode-web-dev-portfolio/memory/**)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\14039\\.vscode\\web-dev\\portfolio\\app"
+    ]
+  }
+}

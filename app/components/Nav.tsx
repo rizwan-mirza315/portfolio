@@ -43,13 +43,6 @@ export default function Nav() {
         })}
       </div>
 
-      <a
-        href="/contact"
-        className="hidden sm:block text-sm font-semibold px-4 py-2 rounded-full transition-all duration-200 hover:opacity-90"
-        style={{ background: "linear-gradient(135deg, #7c3aed, #06b6d4)", color: "#fff" }}
-      >
-        Hire Me
-      </a>
     </nav>
   );
 }
