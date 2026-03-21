@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import Nav from "../components/Nav";
 import styles from "./Portfolio.module.css";
 
@@ -202,36 +202,11 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
   const p = item as typeof projects[0];
   const l = item as typeof leadership[0];
 
-  const rotX = useMotionValue(0);
-  const rotY = useMotionValue(0);
-  const springX = useSpring(rotX, { stiffness: 300, damping: 30 });
-  const springY = useSpring(rotY, { stiffness: 300, damping: 30 });
-
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const cx = rect.left + rect.width / 2;
-    const cy = rect.top + rect.height / 2;
-    rotY.set(((e.clientX - cx) / (rect.width / 2)) * 5);
-    rotX.set(((cy - e.clientY) / (rect.height / 2)) * 5);
-  }
-
-  function handleMouseLeave() {
-    rotX.set(0);
-    rotY.set(0);
-  }
-
   return (
-    <div style={{ perspective: "800px" }}>
-      <motion.div
+    <div>
+      <div
         className={styles.card}
-        style={{
-          background: item.gradient,
-          border: `1px solid ${item.border}`,
-          rotateX: springX,
-          rotateY: springY,
-        }}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
+        style={{ background: item.gradient, border: `1px solid ${item.border}` }}
         onClick={() => setOpen(!open)}
       >
         {item.image && (
@@ -335,7 +310,7 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
