@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
+import { motion, useMotionValue, useSpring, useInView } from "framer-motion";
 import Nav from "../components/Nav";
 import styles from "./Portfolio.module.css";
 
@@ -156,122 +157,185 @@ const leadership = [
   },
 ];
 
+function AnimatedStat({ value, label }: { value: string; label: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState(value);
+
+  useEffect(() => {
+    if (!isInView) return;
+    const match = value.match(/([\d,]+(?:\.\d+)?)/);
+    if (!match || match.index === undefined) return;
+
+    const raw = parseFloat(match[1].replace(/,/g, ""));
+    const pre = value.slice(0, match.index);
+    const post = value.slice(match.index + match[1].length);
+    const isFloat = match[1].includes(".");
+    const decimals = isFloat ? match[1].split(".")[1].length : 0;
+
+    const start = performance.now();
+    const dur = 1000;
+
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      const cur = ease * raw;
+      const fmt = isFloat ? cur.toFixed(decimals) : Math.floor(cur).toLocaleString();
+      setDisplay(`${pre}${fmt}${post}`);
+      if (t < 1) requestAnimationFrame(tick);
+      else setDisplay(value);
+    };
+    requestAnimationFrame(tick);
+  }, [isInView, value]);
+
+  return (
+    <div ref={ref}>
+      <p className={styles.statValue}>{display}</p>
+      <p className={styles.statLabel}>{label}</p>
+    </div>
+  );
+}
+
 function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0]; type: "project" | "leadership" }) {
   const [open, setOpen] = useState(false);
   const isProject = type === "project";
   const p = item as typeof projects[0];
   const l = item as typeof leadership[0];
 
+  const rotX = useMotionValue(0);
+  const rotY = useMotionValue(0);
+  const springX = useSpring(rotX, { stiffness: 300, damping: 30 });
+  const springY = useSpring(rotY, { stiffness: 300, damping: 30 });
+
+  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    rotY.set(((e.clientX - cx) / (rect.width / 2)) * 5);
+    rotX.set(((cy - e.clientY) / (rect.height / 2)) * 5);
+  }
+
+  function handleMouseLeave() {
+    rotX.set(0);
+    rotY.set(0);
+  }
+
   return (
-    <div
-      className={styles.card}
-      style={{ background: item.gradient, border: `1px solid ${item.border}` }}
-      onClick={() => setOpen(!open)}
-    >
-      {item.image && (
-        <div className={styles.cardImageWrapper}>
-          <Image src={item.image} alt={item.title} width={1200} height={1200} className={styles.cardImage} style={{ filter: "brightness(0.7)" }} />
-          <div className={styles.cardImageOverlay} style={{ background: "linear-gradient(to bottom, transparent, rgba(13,13,13,0.8))" }} />
-        </div>
-      )}
-
-      <div className={styles.cardBody}>
-        <div className={styles.cardHeader}>
-          <div className={styles.cardTitleArea}>
-            {isProject && p.logo && (
-              <div className={styles.logoContainer}>
-                <Image src={p.logo} alt={item.title} fill style={{ objectFit: "cover" }} />
-              </div>
-            )}
-            <div>
-              <h3 className={styles.cardTitle}>{item.title}</h3>
-              <p className={styles.cardSubtitle} style={{ color: item.color }}>
-                {isProject ? p.role : l.org}
-              </p>
-            </div>
-          </div>
-          <div className={styles.cardMeta}>
-            <span className={styles.cardYear}>{item.year}</span>
-            <span className={styles.cardToggle} style={{ color: item.color, transform: open ? "rotate(45deg)" : "none" }}>+</span>
-          </div>
-        </div>
-
-        <div className={styles.tags}>
-          {item.tags.map((tag) => (
-            <span key={tag} className={styles.tag}
-              style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <p className={styles.summary}>
-          {isProject ? p.summary : l.bullets[0].b.slice(0, 120) + "..."}
-        </p>
-
-        <div className={styles.cardFooter} style={{ borderTop: `1px solid ${item.border}` }}>
-          <div className={styles.stats}>
-            {item.stats.map((s) => (
-              <div key={s.l}>
-                <p className={styles.statValue}>{s.v}</p>
-                <p className={styles.statLabel}>{s.l}</p>
-              </div>
-            ))}
-          </div>
-          {isProject && p.href && (
-            <a
-              href={p.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className={styles.visitBtn}
-              style={{ background: `${item.color}22`, color: item.color, border: `1px solid ${item.color}44` }}
-            >
-              Visit Site ↗
-            </a>
-          )}
-        </div>
-
-        {open && (
-          <div className={styles.expandedSection} style={{ borderTop: `1px solid ${item.border}` }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {isProject
-              ? p.details.map((d) => (
-                  <div key={d.title}>
-                    <p className={styles.detailTitle}>{d.title}</p>
-                    <p className={styles.detailBody}>{d.body}</p>
-                  </div>
-                ))
-              : <>
-                  {l.bullets.map((b) => (
-                    <div key={b.h} className={styles.bulletItem}>
-                      <span className={styles.bulletDot} style={{ background: item.color }} />
-                      <div>
-                        <p className={styles.bulletTitle}>{b.h}</p>
-                        <p className={styles.bulletBody}>{b.b}</p>
-                      </div>
-                    </div>
-                  ))}
-                  {l.links && l.links.length > 0 && (
-                    <div className={styles.mediaLinks}>
-                      <p className={styles.mediaLabel}>Media Coverage</p>
-                      {l.links.map((link) => (
-                        <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
-                          className={styles.mediaLink}
-                          style={{ color: item.color }}
-                        >
-                          ↗ {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </>
-            }
+    <div style={{ perspective: "800px" }}>
+      <motion.div
+        className={styles.card}
+        style={{
+          background: item.gradient,
+          border: `1px solid ${item.border}`,
+          rotateX: springX,
+          rotateY: springY,
+        }}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        onClick={() => setOpen(!open)}
+      >
+        {item.image && (
+          <div className={styles.cardImageWrapper}>
+            <Image src={item.image} alt={item.title} width={1200} height={1200} className={styles.cardImage} style={{ filter: "brightness(0.7)" }} />
+            <div className={styles.cardImageOverlay} style={{ background: "linear-gradient(to bottom, transparent, rgba(13,13,13,0.8))" }} />
           </div>
         )}
-      </div>
+
+        <div className={styles.cardBody}>
+          <div className={styles.cardHeader}>
+            <div className={styles.cardTitleArea}>
+              {isProject && p.logo && (
+                <div className={styles.logoContainer}>
+                  <Image src={p.logo} alt={item.title} fill style={{ objectFit: "cover" }} />
+                </div>
+              )}
+              <div>
+                <h3 className={styles.cardTitle}>{item.title}</h3>
+                <p className={styles.cardSubtitle} style={{ color: item.color }}>
+                  {isProject ? p.role : l.org}
+                </p>
+              </div>
+            </div>
+            <div className={styles.cardMeta}>
+              <span className={styles.cardYear}>{item.year}</span>
+              <span className={styles.cardToggle} style={{ color: item.color, transform: open ? "rotate(45deg)" : "none" }}>+</span>
+            </div>
+          </div>
+
+          <div className={styles.tags}>
+            {item.tags.map((tag) => (
+              <span key={tag} className={styles.tag}
+                style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          <p className={styles.summary}>
+            {isProject ? p.summary : l.bullets[0].b.slice(0, 120) + "..."}
+          </p>
+
+          <div className={styles.cardFooter} style={{ borderTop: `1px solid ${item.border}` }}>
+            <div className={styles.stats}>
+              {item.stats.map((s) => (
+                <AnimatedStat key={s.l} value={s.v} label={s.l} />
+              ))}
+            </div>
+            {isProject && p.href && (
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className={styles.visitBtn}
+                style={{ background: `${item.color}22`, color: item.color, border: `1px solid ${item.color}44` }}
+              >
+                Visit Site ↗
+              </a>
+            )}
+          </div>
+
+          {open && (
+            <div className={styles.expandedSection} style={{ borderTop: `1px solid ${item.border}` }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              {isProject
+                ? p.details.map((d) => (
+                    <div key={d.title}>
+                      <p className={styles.detailTitle}>{d.title}</p>
+                      <p className={styles.detailBody}>{d.body}</p>
+                    </div>
+                  ))
+                : <>
+                    {l.bullets.map((b) => (
+                      <div key={b.h} className={styles.bulletItem}>
+                        <span className={styles.bulletDot} style={{ background: item.color }} />
+                        <div>
+                          <p className={styles.bulletTitle}>{b.h}</p>
+                          <p className={styles.bulletBody}>{b.b}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {l.links && l.links.length > 0 && (
+                      <div className={styles.mediaLinks}>
+                        <p className={styles.mediaLabel}>Media Coverage</p>
+                        {l.links.map((link) => (
+                          <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
+                            className={styles.mediaLink}
+                            style={{ color: item.color }}
+                          >
+                            ↗ {link.label}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </>
+              }
+            </div>
+          )}
+        </div>
+      </motion.div>
     </div>
   );
 }
@@ -283,40 +347,72 @@ export default function Portfolio() {
 
       <main className={styles.main}>
         <div className={styles.container}>
-          <div className={styles.pageHeader}>
+          <motion.div
+            className={styles.pageHeader}
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+          >
             <p className={styles.sectionLabel}>/ My Portfolio</p>
             <h1 className={styles.heading}>
               Things I&apos;ve
               <br />
-              <span className={styles.gradientText}>
-                built & led.
-              </span>
+              <span className={styles.gradientText}>built & led.</span>
             </h1>
             <p className={styles.subtext}>
               Click any card to expand the full story. These aren&apos;t class projects, they&apos;re real work with real impact.
             </p>
-          </div>
+          </motion.div>
 
           <section className={styles.section}>
-            <div className={styles.sectionHeader}>
+            <motion.div
+              className={styles.sectionHeader}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
               <span className={styles.sectionTitle}>Projects</span>
               <div className={styles.sectionDivider} />
-            </div>
+            </motion.div>
             <div className={styles.grid}>
-              {projects.map((p) => (
-                <Card key={p.id} item={p} type="project" />
+              {projects.map((p, i) => (
+                <motion.div
+                  key={p.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+                >
+                  <Card item={p} type="project" />
+                </motion.div>
               ))}
             </div>
           </section>
 
           <section>
-            <div className={styles.sectionHeader}>
+            <motion.div
+              className={styles.sectionHeader}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
               <span className={styles.sectionTitle}>Leadership</span>
               <div className={styles.sectionDivider} />
-            </div>
+            </motion.div>
             <div className={styles.grid}>
-              {leadership.map((l) => (
-                <Card key={l.id} item={l} type="leadership" />
+              {leadership.map((l, i) => (
+                <motion.div
+                  key={l.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+                >
+                  <Card item={l} type="leadership" />
+                </motion.div>
               ))}
             </div>
           </section>

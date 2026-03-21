@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import Nav from "./components/Nav";
+import ScrambleText from "./components/ScrambleText";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -18,28 +22,34 @@ export default function Home() {
             className={styles.bgImage}
             priority
           />
-          {/* Dark overlay */}
           <div className={styles.overlay} style={{ background: "linear-gradient(to right, rgba(13,13,13,0.95) 45%, rgba(13,13,13,0.5) 100%)" }} />
         </div>
 
         {/* Content */}
         <div className={styles.content}>
+
           {/* Name */}
           <h1 className={styles.heading} style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
-            <span style={{ color: "#fff" }}>Rizwan</span>
+            <ScrambleText text="Rizwan" style={{ color: "#fff" }} />
             <br />
-            <span style={{
-              background: "linear-gradient(135deg, #a855f7, #06b6d4)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}>
-              Mirza.
-            </span>
+            <ScrambleText
+              text="Mirza."
+              style={{
+                background: "linear-gradient(135deg, #a855f7, #06b6d4)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}
+            />
           </h1>
 
           {/* Roles */}
-          <div className={styles.roles}>
+          <motion.div
+            className={styles.roles}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.35, ease: "easeOut" }}
+          >
             {["Builder", "Leader", "Developer"].map((role, i) => (
               <span key={role} className={styles.role}
                 style={{ color: i === 0 ? "#a855f7" : i === 1 ? "#06b6d4" : "#f472b6" }}
@@ -47,16 +57,27 @@ export default function Home() {
                 {role}{i < 2 && <span style={{ color: "rgba(255,255,255,0.2)", marginLeft: "0.75rem" }}>·</span>}
               </span>
             ))}
-          </div>
+          </motion.div>
 
           {/* Description */}
-          <p className={styles.description} style={{ color: "#999", lineHeight: 1.7 }}>
+          <motion.p
+            className={styles.description}
+            style={{ color: "#999", lineHeight: 1.7 }}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.5, ease: "easeOut" }}
+          >
             3rd year Computer Information Systems student at Mount Royal University.
             I founded a consulting club, shipped a real product, and led teams that made headlines.
-          </p>
+          </motion.p>
 
           {/* CTA */}
-          <div className={styles.cta}>
+          <motion.div
+            className={styles.cta}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.65, ease: "easeOut" }}
+          >
             <Link
               href="/portfolio"
               className={styles.ctaBtn}
@@ -71,7 +92,8 @@ export default function Home() {
             >
               About Me
             </Link>
-          </div>
+          </motion.div>
+
         </div>
       </main>
     </>

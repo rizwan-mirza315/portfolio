@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Nav from "../components/Nav";
+import FadeUp from "../components/FadeUp";
 import styles from "./About.module.css";
 
 const skills = [
@@ -37,20 +38,17 @@ export default function About() {
       <Nav />
 
       <main className={styles.main}>
-        <div className={styles.headerSection}>
+        <FadeUp className={styles.headerSection}>
           <p className={styles.sectionLabel} style={{ color: "#a855f7" }}>/ About Me</p>
           <h1 className={styles.heading}>
             The person behind
             <br />
-            <span className={styles.gradientText}>
-              the work.
-            </span>
+            <span className={styles.gradientText}>the work.</span>
           </h1>
-        </div>
+        </FadeUp>
 
         <div className={styles.grid}>
-          {/* Photo + Education */}
-          <div className={styles.photoCol}>
+          <FadeUp className={styles.photoCol}>
             <div style={{ position: "relative" }}>
               <div className={styles.photoWrapper}>
                 <Image
@@ -69,7 +67,6 @@ export default function About() {
               </div>
             </div>
 
-            {/* Education card */}
             <div className={styles.card}
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
             >
@@ -82,7 +79,6 @@ export default function About() {
               </p>
             </div>
 
-            {/* Work experience */}
             <div className={styles.expCard}
               style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
             >
@@ -100,10 +96,9 @@ export default function About() {
                 ))}
               </div>
             </div>
-          </div>
+          </FadeUp>
 
-          {/* Bio + Skills */}
-          <div className={styles.bioCol}>
+          <FadeUp className={styles.bioCol} delay={0.15}>
             <div className={styles.bio}>
               <p>
                 My name is Rizwan, a third year Computer Information Systems student at Mount Royal University in Calgary. I move fast and execute with purpose.
@@ -119,7 +114,6 @@ export default function About() {
               </p>
             </div>
 
-            {/* Skills */}
             <div className={styles.skillsSection}>
               <p className={styles.skillsHeading}>Skills & Stack</p>
               {skills.map((group) => (
@@ -127,9 +121,7 @@ export default function About() {
                   <p className={styles.skillGroupLabel}>{group.category}</p>
                   <div className={styles.skillPills}>
                     {group.items.map((item) => (
-                      <span key={item} className={styles.skillPill}>
-                        {item}
-                      </span>
+                      <span key={item} className={styles.skillPill}>{item}</span>
                     ))}
                   </div>
                 </div>
@@ -139,7 +131,7 @@ export default function About() {
             <Link href="/portfolio" className={styles.ctaBtn}>
               See My Work →
             </Link>
-          </div>
+          </FadeUp>
         </div>
       </main>
     </>
