@@ -24,14 +24,6 @@ export default function Home() {
 
         {/* Content */}
         <div className={styles.content}>
-          {/* Badge */}
-          <div className={styles.badge}
-            style={{ background: "rgba(124,58,237,0.2)", border: "1px solid rgba(168,85,247,0.4)", color: "#a855f7" }}
-          >
-            <span className={styles.dot} />
-            Open to internships · Calgary, AB
-          </div>
-
           {/* Name */}
           <h1 className={styles.heading} style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}>
             <span style={{ color: "#fff" }}>Rizwan</span>
