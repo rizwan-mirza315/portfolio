@@ -14,19 +14,19 @@ const experience = [
   {
     org: "Bissett Consulting Organization",
     role: "Founding President",
-    period: "Sept 2025–Present",
+    period: "2025–Present",
     color: "#a855f7",
   },
   {
     org: "Under Armour",
     role: "Sales Associate",
-    period: "Oct 2024–Present",
+    period: "2024–Present",
     color: "#f472b6",
   },
   {
     org: "9Round Kickboxing Fitness",
     role: "Lead Fitness Trainer",
-    period: "Sept 2022–Feb 2024",
+    period: "2022–2024",
     color: "#06b6d4",
   },
 ];
