@@ -39,7 +39,7 @@ const projects = [
     id: "faith-feeds",
     title: "Faith Feeds",
     role: "Founder & Full-Stack Developer",
-    year: "2026",
+    year: "2026–Present",
     color: "#06b6d4",
     gradient: "linear-gradient(135deg, #0891b222, #06b6d422)",
     border: "rgba(6,182,212,0.25)",
