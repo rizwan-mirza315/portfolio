@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Nav from "../components/Nav";
+import styles from "./Portfolio.module.css";
 
 const projects = [
   {
@@ -159,41 +160,41 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
 
   return (
     <div
-      className="rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer"
+      className={styles.card}
       style={{ background: item.gradient, border: `1px solid ${item.border}` }}
       onClick={() => setOpen(!open)}
     >
       {item.image && (
-        <div className="relative w-full">
-          <Image src={item.image} alt={item.title} width={1200} height={1200} className="w-full h-auto block" style={{ filter: "brightness(0.7)" }} />
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, transparent, rgba(13,13,13,0.8))" }} />
+        <div className={styles.cardImageWrapper}>
+          <Image src={item.image} alt={item.title} width={1200} height={1200} className={styles.cardImage} style={{ filter: "brightness(0.7)" }} />
+          <div className={styles.cardImageOverlay} style={{ background: "linear-gradient(to bottom, transparent, rgba(13,13,13,0.8))" }} />
         </div>
       )}
 
-      <div className="p-6">
-        <div className="flex items-start justify-between gap-4 mb-4">
-          <div className="flex items-center gap-3">
+      <div className={styles.cardBody}>
+        <div className={styles.cardHeader}>
+          <div className={styles.cardTitleArea}>
             {isProject && p.logo && (
-              <div className="w-16 h-16 rounded-xl shrink-0 overflow-hidden relative">
-                <Image src={p.logo} alt={item.title} fill className="object-cover" />
+              <div className={styles.logoContainer}>
+                <Image src={p.logo} alt={item.title} fill style={{ objectFit: "cover" }} />
               </div>
             )}
             <div>
-              <h3 className="text-white font-bold text-lg leading-tight">{item.title}</h3>
-              <p className="text-sm mt-0.5" style={{ color: item.color }}>
+              <h3 className={styles.cardTitle}>{item.title}</h3>
+              <p className={styles.cardSubtitle} style={{ color: item.color }}>
                 {isProject ? p.role : l.org}
               </p>
             </div>
           </div>
-          <div className="flex flex-col items-end gap-2 shrink-0">
-            <span className="text-xs font-mono" style={{ color: "#555" }}>{item.year}</span>
-            <span className="text-lg transition-transform duration-300" style={{ color: item.color, transform: open ? "rotate(45deg)" : "none" }}>+</span>
+          <div className={styles.cardMeta}>
+            <span className={styles.cardYear}>{item.year}</span>
+            <span className={styles.cardToggle} style={{ color: item.color, transform: open ? "rotate(45deg)" : "none" }}>+</span>
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className={styles.tags}>
           {item.tags.map((tag) => (
-            <span key={tag} className="text-xs px-2.5 py-1 rounded-full font-medium"
+            <span key={tag} className={styles.tag}
               style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
             >
               {tag}
@@ -201,16 +202,16 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
           ))}
         </div>
 
-        <p className="text-sm leading-relaxed" style={{ color: "#888" }}>
+        <p className={styles.summary}>
           {isProject ? p.summary : l.bullets[0].b.slice(0, 120) + "..."}
         </p>
 
-        <div className="flex flex-wrap items-center justify-between gap-4 mt-5 pt-4" style={{ borderTop: `1px solid ${item.border}` }}>
-          <div className="flex flex-wrap gap-4">
+        <div className={styles.cardFooter} style={{ borderTop: `1px solid ${item.border}` }}>
+          <div className={styles.stats}>
             {item.stats.map((s) => (
               <div key={s.l}>
-                <p className="font-bold text-white text-sm">{s.v}</p>
-                <p className="text-xs mt-0.5" style={{ color: "#555" }}>{s.l}</p>
+                <p className={styles.statValue}>{s.v}</p>
+                <p className={styles.statLabel}>{s.l}</p>
               </div>
             ))}
           </div>
@@ -220,7 +221,7 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="text-xs font-semibold px-3 py-1.5 rounded-full transition-opacity hover:opacity-80 shrink-0"
+              className={styles.visitBtn}
               style={{ background: `${item.color}22`, color: item.color, border: `1px solid ${item.color}44` }}
             >
               Visit Site ↗
@@ -229,32 +230,32 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
         </div>
 
         {open && (
-          <div className="mt-6 pt-6 space-y-5" style={{ borderTop: `1px solid ${item.border}` }}
+          <div className={styles.expandedSection} style={{ borderTop: `1px solid ${item.border}` }}
             onClick={(e) => e.stopPropagation()}
           >
             {isProject
               ? p.details.map((d) => (
                   <div key={d.title}>
-                    <p className="font-semibold text-white text-sm mb-1">{d.title}</p>
-                    <p className="text-sm leading-relaxed" style={{ color: "#777" }}>{d.body}</p>
+                    <p className={styles.detailTitle}>{d.title}</p>
+                    <p className={styles.detailBody}>{d.body}</p>
                   </div>
                 ))
               : <>
                   {l.bullets.map((b) => (
-                    <div key={b.h} className="flex gap-3">
-                      <span className="w-1.5 h-1.5 rounded-full shrink-0 mt-2" style={{ background: item.color }} />
+                    <div key={b.h} className={styles.bulletItem}>
+                      <span className={styles.bulletDot} style={{ background: item.color }} />
                       <div>
-                        <p className="font-semibold text-white text-sm mb-0.5">{b.h}</p>
-                        <p className="text-sm leading-relaxed" style={{ color: "#777" }}>{b.b}</p>
+                        <p className={styles.bulletTitle}>{b.h}</p>
+                        <p className={styles.bulletBody}>{b.b}</p>
                       </div>
                     </div>
                   ))}
                   {l.links && l.links.length > 0 && (
-                    <div className="flex flex-col gap-2 pt-2">
-                      <p className="text-xs font-semibold uppercase tracking-wider" style={{ color: "#555" }}>Media Coverage</p>
+                    <div className={styles.mediaLinks}>
+                      <p className={styles.mediaLabel}>Media Coverage</p>
                       {l.links.map((link) => (
                         <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
-                          className="text-xs font-medium flex items-center gap-1.5 hover:opacity-80 transition-opacity"
+                          className={styles.mediaLink}
                           style={{ color: item.color }}
                         >
                           ↗ {link.label}
@@ -276,33 +277,28 @@ export default function Portfolio() {
     <>
       <Nav />
 
-      <main className="min-h-screen pt-24 pb-20 px-6 sm:px-10 lg:px-20">
-        <div className="max-w-6xl mx-auto">
-          <div className="mb-14">
-            <p className="text-sm font-semibold mb-3" style={{ color: "#a855f7" }}>/ My Portfolio</p>
-            <h1 className="text-4xl sm:text-6xl font-bold text-white leading-tight">
+      <main className={styles.main}>
+        <div className={styles.container}>
+          <div className={styles.pageHeader}>
+            <p className={styles.sectionLabel}>/ My Portfolio</p>
+            <h1 className={styles.heading}>
               Things I&apos;ve
               <br />
-              <span style={{
-                background: "linear-gradient(135deg, #a855f7, #06b6d4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}>
+              <span className={styles.gradientText}>
                 built & led.
               </span>
             </h1>
-            <p className="mt-4 text-base max-w-xl" style={{ color: "#666" }}>
+            <p className={styles.subtext}>
               Click any card to expand the full story. These aren&apos;t class projects, they&apos;re real work with real impact.
             </p>
           </div>
 
-          <section className="mb-14">
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-bold text-white text-xl">Projects</span>
-              <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+          <section className={styles.section}>
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionTitle}>Projects</span>
+              <div className={styles.sectionDivider} />
             </div>
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className={styles.grid}>
               {projects.map((p) => (
                 <Card key={p.id} item={p} type="project" />
               ))}
@@ -310,11 +306,11 @@ export default function Portfolio() {
           </section>
 
           <section>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="font-bold text-white text-xl">Leadership</span>
-              <div className="h-px flex-1" style={{ background: "rgba(255,255,255,0.07)" }} />
+            <div className={styles.sectionHeader}>
+              <span className={styles.sectionTitle}>Leadership</span>
+              <div className={styles.sectionDivider} />
             </div>
-            <div className="grid sm:grid-cols-2 gap-5">
+            <div className={styles.grid}>
               {leadership.map((l) => (
                 <Card key={l.id} item={l} type="leadership" />
               ))}
