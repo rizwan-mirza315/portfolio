@@ -23,8 +23,8 @@ export default function Contact() {
             </span>
           </h1>
           <p className={styles.tagline}>
-            I&apos;m actively looking for startup internships, product, engineering, or operations.
-            If you&apos;re building something interesting, I&apos;d love to be part of it.
+            I&apos;m actively looking for startup internships in: consulting and strategy, software engineering, or operations.
+            If you&apos;re building something, I&apos;d love to be part of it!
           </p>
 
           <div className={styles.grid}>
