@@ -26,7 +26,7 @@ const experience = [
   },
   {
     org: "9Round Kickboxing Fitness",
-    role: "Lead Fitness Trainer",
+    role: "Gym Operations Coordinator",
     period: "2022–2024",
     color: "#06b6d4",
   },
