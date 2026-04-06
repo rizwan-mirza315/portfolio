@@ -13,7 +13,7 @@ export default function ScrambleText({
   className?: string;
   style?: React.CSSProperties;
 }) {
-  const [display, setDisplay] = useState(() => " ".repeat(text.length));
+  const [display, setDisplay] = useState(text);
 
   useEffect(() => {
     let frame = 0;
