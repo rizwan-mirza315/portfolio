@@ -112,6 +112,31 @@ const projects = [
     stats: [{ v: "25+", l: "Feeders Tracked" }, { v: "3", l: "Reliability Metrics" }, { v: "Python + Power BI", l: "Stack" }],
   },
   {
+    id: "chipotle-capital",
+    title: "Chipotle Capital Structure Analysis",
+    role: "Corporate Finance",
+    year: "",
+    color: "#f97316",
+    gradient: "linear-gradient(135deg, #c2410c22, #f9731622)",
+    border: "rgba(249,115,22,0.25)",
+    logo: null,
+    image: null,
+    href: null,
+    tags: ["Excel", "DCF", "APV", "WACC", "Financial Modeling"],
+    summary: "Multi-scenario financial model analyzing Chipotle's optimal capital structure across three debt levels using APV and DCF frameworks, culminating in a recommendation grounded in Trade-Off Theory, Pecking Order Theory, and MM with taxes.",
+    details: [
+      {
+        title: "The Model",
+        body: "Evaluated three debt scenarios ($1,150mm, $2,300mm, $3,450mm) against a zero-debt baseline. For each scenario, calculated post-buyback share prices, shares repurchased, levered betas using the Hamada equation, cost of equity, and WACC. Built separate FCFF and FCFE DCF sheets for each scenario with 5-year projections and terminal value.",
+      },
+      {
+        title: "The Recommendation",
+        body: "Recommended Scenario 1 ($1,150mm) grounded in Trade-Off Theory, Pecking Order Theory, and MM with taxes. Chipotle's food safety tail risk was the key constraint on leverage — the potential for a headline event creating sudden liquidity pressure made heavier debt loads too dangerous regardless of the tax shield benefit.",
+      },
+    ],
+    stats: [{ v: "3", l: "Debt Scenarios" }, { v: "5-Year", l: "Projections" }, { v: "APV + DCF", l: "Framework" }],
+  },
+  {
     id: "retirement-analysis",
     title: "Retirement Portfolio Analysis",
     role: "Financial Analyst",
