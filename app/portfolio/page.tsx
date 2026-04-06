@@ -84,7 +84,7 @@ const projects = [
         body: "Built with Next.js 14, TypeScript, and Tailwind CSS, deployed on Vercel. Includes a password-protected admin panel where league managers submit game scores and player stats through a form interface. Data persists to a local JSON file via Next.js API routes, eliminating the need for any external database.",
       },
     ],
-    stats: [{ v: "4", l: "Core Features" }, { v: "0", l: "External DBs" }, { v: "Live", l: "On Vercel" }],
+    stats: [{ v: "30", l: "Users" }, { v: "0", l: "External DBs" }, { v: "Live", l: "On Vercel" }],
   },
   {
     id: "distribution-dashboard",
