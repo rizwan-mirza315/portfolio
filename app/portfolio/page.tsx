@@ -62,6 +62,31 @@ const projects = [
     stats: [{ v: "100+", l: "Meals Donated" }, { v: "Real-time", l: "Food Matching" }, { v: "5", l: "Technologies" }],
   },
   {
+    id: "ahl",
+    title: "Ahmadiyya Hockey League",
+    role: "Full-Stack Developer",
+    year: "2025–Present",
+    color: "#38bdf8",
+    gradient: "linear-gradient(135deg, #0369a122, #38bdf822)",
+    border: "rgba(56,189,248,0.25)",
+    logo: "/ahl-logo-v2.png",
+    image: null,
+    href: null,
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
+    summary: "Full-stack sports management platform for a community hockey league. Live standings, schedules, player stats, team rosters, and a password-protected admin panel, no external database needed.",
+    details: [
+      {
+        title: "What it does",
+        body: "The AHL web app handles everything a community hockey league needs: a live standings table with dynamically calculated points, a full season schedule with game results, a player statistics leaderboard, individual team roster pages, and a head-to-head player comparison tool with shareable URLs so users can filter by team and compare season stats side by side.",
+      },
+      {
+        title: "How it's built",
+        body: "Built with Next.js 14, TypeScript, and Tailwind CSS, deployed on Vercel. Includes a password-protected admin panel where league managers submit game scores and player stats through a form interface. Data persists to a local JSON file via Next.js API routes, eliminating the need for any external database.",
+      },
+    ],
+    stats: [{ v: "4", l: "Core Features" }, { v: "0", l: "External DBs" }, { v: "Live", l: "On Vercel" }],
+  },
+  {
     id: "distribution-dashboard",
     title: "Distribution Reliability Dashboard",
     role: "Data Analyst",
