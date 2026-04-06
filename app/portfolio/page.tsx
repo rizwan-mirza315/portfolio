@@ -71,7 +71,7 @@ const projects = [
     border: "rgba(56,189,248,0.25)",
     logo: "/ahl-logo-v2.png",
     image: null,
-    href: null,
+    href: "https://ahl-ten.vercel.app/",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Vercel"],
     summary: "Full-stack sports management platform for a community hockey league. Live standings, schedules, player stats, team rosters, and a password-protected admin panel, no external database needed.",
     details: [
@@ -246,7 +246,7 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
             <div className={styles.cardTitleArea}>
               {isProject && p.logo && (
                 <div className={styles.logoContainer}>
-                  <Image src={p.logo} alt={item.title} fill style={{ objectFit: "cover" }} />
+                  <Image src={p.logo} alt={item.title} fill style={{ objectFit: "contain" }} />
                 </div>
               )}
               <div>
