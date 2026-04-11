@@ -3,9 +3,9 @@ import FadeUp from "../components/FadeUp";
 import styles from "./Contact.module.css";
 
 const socials = [
-  { label: "Email", value: "rmirz559@mtroyal.ca", href: "mailto:rmirz559@mtroyal.ca", color: "#a855f7" },
-  { label: "LinkedIn", value: "linkedin.com/in/rizwan-bmirza", href: "https://www.linkedin.com/in/rizwan-bmirza/", color: "#06b6d4" },
-  { label: "GitHub", value: "github.com/rizwan-mirza315", href: "https://github.com/rizwan-mirza315", color: "#f472b6" },
+  { label: "Email", value: "rmirz559@mtroyal.ca", href: "mailto:rmirz559@mtroyal.ca" },
+  { label: "LinkedIn", value: "linkedin.com/in/rizwan-bmirza", href: "https://www.linkedin.com/in/rizwan-bmirza/" },
+  { label: "GitHub", value: "github.com/rizwan-mirza315", href: "https://github.com/rizwan-mirza315" },
 ];
 
 export default function Contact() {
@@ -18,9 +18,7 @@ export default function Contact() {
           <FadeUp>
             <p className={styles.sectionLabel}>/ Contact Me</p>
             <h1 className={styles.heading}>
-              Let&apos;s build
-              <br />
-              <span className={styles.gradientText}>something great.</span>
+              Let&apos;s build<br />something great.
             </h1>
             <p className={styles.tagline}>
               I&apos;m actively looking for internships in: consulting and strategy, software engineering, or operations.
@@ -37,20 +35,17 @@ export default function Contact() {
                   target={s.href.startsWith("mailto") ? undefined : "_blank"}
                   rel="noopener noreferrer"
                   className={styles.socialCard}
-                  style={{ background: `${s.color}12`, border: `1px solid ${s.color}30` }}
                 >
-                  <p className={styles.socialLabel} style={{ color: s.color }}>{s.label}</p>
+                  <p className={styles.socialLabel}>{s.label}</p>
                   <p className={styles.socialValue}>{s.value}</p>
-                  <p className={styles.socialHint}>Click to open →</p>
+                  <p className={styles.socialHint}>Open →</p>
                 </a>
               ))}
             </div>
           </FadeUp>
 
           <FadeUp delay={0.2}>
-            <div className={styles.ctaBox}
-              style={{ background: "linear-gradient(135deg, rgba(124,58,237,0.15), rgba(6,182,212,0.1))", border: "1px solid rgba(168,85,247,0.2)" }}
-            >
+            <div className={styles.ctaBox}>
               <h2 className={styles.ctaTitle}>Ready to work together?</h2>
               <p className={styles.ctaText}>
                 I respond fast. Drop me an email and let&apos;s set up a call.

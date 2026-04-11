@@ -11,14 +11,12 @@ const projects = [
     id: "bco",
     title: "Bissett Consulting Organization",
     role: "Founding President",
-    year: "2025–Present",
-    color: "#a855f7",
-    gradient: "linear-gradient(135deg, #7c3aed22, #a855f722)",
-    border: "rgba(168,85,247,0.25)",
+    year: "Sept 2025–Present",
+    category: "Consulting",
     logo: "/bco-logo.png",
     image: null,
     href: "https://bissettconsulting.com",
-    tags: ["HTML", "CSS", "Vercel", "Consulting", "PwC", "MRU"],
+    tags: ["HTML", "CSS", "Vercel", "Consulting", "MRU"],
     summary: "Founded MRU's first consulting club. Grew to 30+ members, secured PwC as corporate sponsor, hosted a Corporate Strategy Summit, and delivered consulting engagements for 3 Calgary SMEs.",
     details: [
       {
@@ -26,12 +24,12 @@ const projects = [
         body: "BCO gives MRU students real consulting exposure through case workshops, networking with industry professionals, and pro bono engagements for local Calgary businesses. Events include the Corporate Strategy Summit (industry speakers from PwC, Optis, and MRU faculty with Fortune 500 experience, 50+ attendees), the BCO Consulting Cup (flagship campus-wide case competition), and member-exclusive Case Workshops focused on structured problem-solving and analytical thinking.",
       },
       {
-        title: "How it's built",
-        body: "The BCO website (bissettconsulting.com) is built with HTML and CSS, clean, fast, and deployed on Vercel. Built and maintained by me alongside running the club.",
+        title: "Client Results",
+        body: "Improved conversion for an auto repair shop by 23% through digital channel analysis and online presence recommendations. Reduced average per-vehicle costs by 12% for a car dealership through financial statement analysis and cost categorization.",
       },
       {
-        title: "Client Results",
-        body: "Improved conversion for an auto repair shop by identifying target customers, analyzing competitor digital channels, and recommending a structured online presence, increasing weekly business by 23%. Conducted a cost analysis for a car dealership by evaluating financial statements and categorizing fixed, variable, and semi-variable costs, reducing average per-vehicle costs by 12%.",
+        title: "How it's built",
+        body: "The BCO website (bissettconsulting.com) is built with HTML and CSS, clean, fast, and deployed on Vercel. Built and maintained by me alongside running the club.",
       },
     ],
     stats: [{ v: "30+", l: "Members" }, { v: "3", l: "SME Clients" }, { v: "1st", l: "Club at MRU" }],
@@ -41,9 +39,7 @@ const projects = [
     title: "Faith Feeds",
     role: "Founder & Full-Stack Developer",
     year: "2026–Present",
-    color: "#06b6d4",
-    gradient: "linear-gradient(135deg, #0891b222, #06b6d422)",
-    border: "rgba(6,182,212,0.25)",
+    category: "Product",
     logo: "/faith-feeds-logo.png",
     image: null,
     href: "https://faithfeeds.org",
@@ -66,9 +62,7 @@ const projects = [
     title: "Ahmadiyya Hockey League",
     role: "Full-Stack Developer",
     year: "2025–Present",
-    color: "#38bdf8",
-    gradient: "linear-gradient(135deg, #0369a122, #38bdf822)",
-    border: "rgba(56,189,248,0.25)",
+    category: "Product",
     logo: "/ahl-logo-v2.png",
     image: null,
     href: "https://ahl-ten.vercel.app/",
@@ -90,10 +84,8 @@ const projects = [
     id: "distribution-dashboard",
     title: "Distribution Reliability Dashboard",
     role: "Data Analyst",
-    year: "",
-    color: "#f472b6",
-    gradient: "linear-gradient(135deg, #db277722, #f472b622)",
-    border: "rgba(244,114,182,0.25)",
+    year: "2024",
+    category: "Data",
     logo: null,
     image: null,
     href: null,
@@ -116,9 +108,7 @@ const projects = [
     title: "Chipotle Capital Structure Analysis",
     role: "Corporate Finance",
     year: "",
-    color: "#f97316",
-    gradient: "linear-gradient(135deg, #c2410c22, #f9731622)",
-    border: "rgba(249,115,22,0.25)",
+    category: "Finance",
     logo: null,
     image: null,
     href: null,
@@ -141,9 +131,7 @@ const projects = [
     title: "Retirement Portfolio Analysis",
     role: "Financial Analyst",
     year: "",
-    color: "#34d399",
-    gradient: "linear-gradient(135deg, #05966922, #34d39922)",
-    border: "rgba(52,211,153,0.25)",
+    category: "Finance",
     logo: null,
     image: null,
     href: null,
@@ -169,9 +157,7 @@ const leadership = [
     title: "Director of Social Services",
     org: "Ahmadiyya Muslim Youth Association",
     year: "2023–Present",
-    color: "#f97316",
-    gradient: "linear-gradient(135deg, #ea580c22, #f9731622)",
-    border: "rgba(249,115,22,0.25)",
+    category: "Leadership",
     image: "/amj-new.jpeg",
     imagePosition: "top",
     tags: ["Community", "Leadership", "Calgary"],
@@ -191,9 +177,7 @@ const leadership = [
     title: "Chairman",
     org: "Run for Calgary",
     year: "2025–Present",
-    color: "#22d3ee",
-    gradient: "linear-gradient(135deg, #0891b222, #22d3ee22)",
-    border: "rgba(34,211,238,0.25)",
+    category: "Leadership",
     image: "/rfc.jpg",
     imagePosition: "center",
     tags: ["Events", "Operations", "Calgary"],
@@ -239,7 +223,7 @@ function AnimatedStat({ value, label }: { value: string; label: string }) {
   }, [isInView, value]);
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className={styles.statItem}>
       <p className={styles.statValue}>{display}</p>
       <p className={styles.statLabel}>{label}</p>
     </div>
@@ -253,78 +237,49 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
   const l = item as typeof leadership[0];
 
   return (
-    <div>
-      <div
-        className={styles.card}
-        style={{ background: item.gradient, border: `1px solid ${item.border}` }}
-        onClick={() => setOpen(!open)}
-      >
-        {item.image && (
-          <div className={styles.cardImageWrapper}>
-            <Image src={item.image} alt={item.title} width={1200} height={1200} className={styles.cardImage} style={{ filter: "brightness(0.7)" }} />
-            <div className={styles.cardImageOverlay} style={{ background: "linear-gradient(to bottom, transparent, rgba(13,13,13,0.8))" }} />
-          </div>
-        )}
-
-        <div className={styles.cardBody}>
-          <div className={styles.cardHeader}>
-            <div className={styles.cardTitleArea}>
-              {isProject && p.logo && (
-                <div className={styles.logoContainer}>
-                  <Image src={p.logo} alt={item.title} fill style={{ objectFit: "contain" }} />
-                </div>
-              )}
-              <div>
-                <h3 className={styles.cardTitle}>{item.title}</h3>
-                <p className={styles.cardSubtitle} style={{ color: item.color }}>
-                  {isProject ? p.role : l.org}
-                </p>
-              </div>
+    <div className={styles.projectRow}>
+      <div className={styles.rowMain} onClick={() => setOpen(!open)}>
+        <div className={styles.rowLeft}>
+          {isProject && p.logo && (
+            <div className={["faith-feeds","ahl"].includes(p.id) ? styles.rowLogoLarge : styles.rowLogo}>
+              <Image src={p.logo} alt={item.title} fill style={{ objectFit: "contain" }} />
             </div>
-            <div className={styles.cardMeta}>
-              <span className={styles.cardYear}>{item.year}</span>
-              <span className={styles.cardToggle} style={{ color: item.color, transform: open ? "rotate(45deg)" : "none" }}>+</span>
+          )}
+          <div>
+            <h3 className={styles.rowTitle}>{item.title}</h3>
+            <p className={styles.rowSub}>{isProject ? p.role : l.org}</p>
+          </div>
+        </div>
+        <div className={styles.rowRight}>
+          <span className={styles.rowCategory}>{item.category}</span>
+          {item.year && <span className={styles.rowYear}>{item.year}</span>}
+          <span className={styles.rowToggle} style={{ transform: open ? "rotate(45deg)" : "none" }}>+</span>
+        </div>
+      </div>
+
+      {open && (
+        <div
+          className={item.image ? styles.expandedWithImage : styles.expandedSection}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className={item.image ? styles.expandedInfo : undefined}>
+            <div className={styles.expandedTags}>
+              {item.tags.map((tag) => (
+                <span key={tag} className={styles.tag}>{tag}</span>
+              ))}
             </div>
-          </div>
 
-          <div className={styles.tags}>
-            {item.tags.map((tag) => (
-              <span key={tag} className={styles.tag}
-                style={{ background: `${item.color}18`, color: item.color, border: `1px solid ${item.color}30` }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+            <p className={styles.summary}>
+              {isProject ? p.summary : l.bullets[0].b}
+            </p>
 
-          <p className={styles.summary}>
-            {isProject ? p.summary : l.bullets[0].b.slice(0, 120) + "..."}
-          </p>
-
-          <div className={styles.cardFooter} style={{ borderTop: `1px solid ${item.border}` }}>
-            <div className={styles.stats}>
+            <div className={styles.statsRow}>
               {item.stats.map((s) => (
                 <AnimatedStat key={s.l} value={s.v} label={s.l} />
               ))}
             </div>
-            {isProject && p.href && (
-              <a
-                href={p.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className={styles.visitBtn}
-                style={{ background: `${item.color}22`, color: item.color, border: `1px solid ${item.color}44` }}
-              >
-                Visit Site ↗
-              </a>
-            )}
-          </div>
 
-          {open && (
-            <div className={styles.expandedSection} style={{ borderTop: `1px solid ${item.border}` }}
-              onClick={(e) => e.stopPropagation()}
-            >
+            <div className={styles.detailsBlock}>
               {isProject
                 ? p.details.map((d) => (
                     <div key={d.title}>
@@ -335,21 +290,15 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
                 : <>
                     {l.bullets.map((b) => (
                       <div key={b.h} className={styles.bulletItem}>
-                        <span className={styles.bulletDot} style={{ background: item.color }} />
-                        <div>
-                          <p className={styles.bulletTitle}>{b.h}</p>
-                          <p className={styles.bulletBody}>{b.b}</p>
-                        </div>
+                        <p className={styles.bulletTitle}>{b.h}</p>
+                        <p className={styles.bulletBody}>{b.b}</p>
                       </div>
                     ))}
                     {l.links && l.links.length > 0 && (
                       <div className={styles.mediaLinks}>
                         <p className={styles.mediaLabel}>Media Coverage</p>
                         {l.links.map((link) => (
-                          <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer"
-                            className={styles.mediaLink}
-                            style={{ color: item.color }}
-                          >
+                          <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={styles.mediaLink}>
                             ↗ {link.label}
                           </a>
                         ))}
@@ -358,9 +307,34 @@ function Card({ item, type }: { item: typeof projects[0] | typeof leadership[0];
                   </>
               }
             </div>
+
+            {isProject && p.href && (
+              <a
+                href={p.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className={styles.visitBtn}
+              >
+                Visit Site ↗
+              </a>
+            )}
+          </div>
+
+          {item.image && (
+            <div className={styles.cardImageWrapper}>
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={1200}
+                height={1600}
+                className={styles.cardImage}
+                style={{ objectPosition: (item as typeof leadership[0]).imagePosition ?? "center" }}
+              />
+            </div>
           )}
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -381,65 +355,64 @@ export default function Portfolio() {
           >
             <p className={styles.sectionLabel}>/ My Portfolio</p>
             <h1 className={styles.heading}>
-              Things I&apos;ve
-              <br />
-              <span className={styles.gradientText}>built & led.</span>
+              Things I&apos;ve<br />Built & Led.
             </h1>
             <p className={styles.subtext}>
-              Click any card to expand the full story. These aren&apos;t class projects, they&apos;re real work with real impact.
+              Click any row to expand the full story.
             </p>
           </motion.div>
 
-          <section className={styles.section}>
-            <motion.div
-              className={styles.sectionHeader}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
-              <span className={styles.sectionTitle}>Projects</span>
-              <div className={styles.sectionDivider} />
-            </motion.div>
-            <div className={styles.grid}>
-              {projects.map((p, i) => (
+          {[
+            { title: "Software Development", items: projects.filter(p => ["bco","faith-feeds","ahl"].includes(p.id)) },
+            { title: "Business / Financial Analysis", items: projects.filter(p => ["distribution-dashboard","chipotle-capital","retirement-analysis"].includes(p.id)) },
+          ].map((section) => (
+            <section key={section.title} className={styles.section}>
+              <motion.div
+                className={styles.sectionHeader}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+              >
+                <span className={styles.sectionTitle}>{section.title}</span>
+                <div className={styles.sectionDivider} />
+              </motion.div>
+              {section.items.map((p, i) => (
                 <motion.div
                   key={p.id}
-                  initial={{ opacity: 0, y: 24 }}
+                  initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.4, delay: i * 0.06, ease: "easeOut" }}
                 >
                   <Card item={p} type="project" />
                 </motion.div>
               ))}
-            </div>
-          </section>
+            </section>
+          ))}
 
-          <section>
+          <section className={styles.section}>
             <motion.div
               className={styles.sectionHeader}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
             >
               <span className={styles.sectionTitle}>Leadership</span>
               <div className={styles.sectionDivider} />
             </motion.div>
-            <div className={styles.grid}>
-              {leadership.map((l, i) => (
-                <motion.div
-                  key={l.id}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
-                >
-                  <Card item={l} type="leadership" />
-                </motion.div>
-              ))}
-            </div>
+            {leadership.map((l, i) => (
+              <motion.div
+                key={l.id}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.4, delay: i * 0.06, ease: "easeOut" }}
+              >
+                <Card item={l} type="leadership" />
+              </motion.div>
+            ))}
           </section>
         </div>
       </main>

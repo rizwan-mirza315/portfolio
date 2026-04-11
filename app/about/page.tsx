@@ -12,24 +12,9 @@ const skills = [
 ];
 
 const experience = [
-  {
-    org: "Bissett Consulting Organization",
-    role: "Founding President",
-    period: "2025–Present",
-    color: "#a855f7",
-  },
-  {
-    org: "Under Armour",
-    role: "Sales Associate",
-    period: "2024–Present",
-    color: "#f472b6",
-  },
-  {
-    org: "9Round Kickboxing Fitness",
-    role: "Gym Operations Coordinator",
-    period: "2022–2024",
-    color: "#06b6d4",
-  },
+  { org: "Bissett Consulting Organization", role: "Founding President", period: "2025–Present" },
+  { org: "Under Armour", role: "Sales Associate", period: "2024–Present" },
+  { org: "9Round Kickboxing Fitness", role: "Gym Operations Coordinator", period: "2022–2024" },
 ];
 
 export default function About() {
@@ -39,11 +24,9 @@ export default function About() {
 
       <main className={styles.main}>
         <FadeUp className={styles.headerSection}>
-          <p className={styles.sectionLabel} style={{ color: "#a855f7" }}>/ About Me</p>
+          <p className={styles.sectionLabel}>/ About Me</p>
           <h1 className={styles.heading}>
-            The person behind
-            <br />
-            <span className={styles.gradientText}>the work.</span>
+            The person<br />behind the work.
           </h1>
         </FadeUp>
 
@@ -59,17 +42,13 @@ export default function About() {
                 />
                 <div className={styles.photoOverlay} />
               </div>
-              <div className={styles.photoBadge}
-                style={{ background: "rgba(124,58,237,0.15)", border: "1px solid rgba(168,85,247,0.3)", backdropFilter: "blur(10px)" }}
-              >
+              <div className={styles.photoBadge}>
                 <p className={styles.photoBadgeYear}>3rd Year</p>
                 <p className={styles.photoBadgeRole}>CIS + Finance @ MRU</p>
               </div>
             </div>
 
-            <div className={styles.card}
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
-            >
+            <div className={styles.card}>
               <p className={styles.cardLabel}>Education</p>
               <p className={styles.cardTitle}>Bachelor of Computer Information Systems</p>
               <p className={styles.cardSubtitle}>Minor in Finance</p>
@@ -79,17 +58,15 @@ export default function About() {
               </p>
             </div>
 
-            <div className={styles.expCard}
-              style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.07)" }}
-            >
+            <div className={styles.expCard}>
               <p className={styles.cardLabel}>Experience</p>
               <div className={styles.expList}>
                 {experience.map((e) => (
                   <div key={e.org} className={styles.expItem}>
-                    <div className={styles.expDot} style={{ background: e.color }} />
+                    <div className={styles.expDot} />
                     <div>
                       <p className={styles.expRole}>{e.role}</p>
-                      <p className={styles.expOrg} style={{ color: e.color }}>{e.org}</p>
+                      <p className={styles.expOrg}>{e.org}</p>
                       <p className={styles.expPeriod}>{e.period}</p>
                     </div>
                   </div>
