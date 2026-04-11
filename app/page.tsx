@@ -16,15 +16,6 @@ export default function Home() {
         <Image src="/new-cover-pic.jpg" alt="" fill className={styles.coverImage} priority />
         <div className={styles.coverOverlay} />
         <div className={styles.mainContent}>
-        <motion.p
-          className={styles.eyebrow}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.4 }}
-        >
-          Calgary, AB — CIS + Finance, MRU &apos;27
-        </motion.p>
-
         <h1 className={styles.heading}>
           <ScrambleText text="RIZWAN" />
           <br />
@@ -32,22 +23,12 @@ export default function Home() {
         </h1>
 
         <motion.p
-          className={styles.roles}
+          className={styles.eyebrow}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
+          transition={{ duration: 0.4 }}
         >
-          Builder &nbsp;·&nbsp; Leader &nbsp;·&nbsp; Developer
-        </motion.p>
-
-        <motion.p
-          className={styles.description}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.35 }}
-        >
-          I founded a consulting club, shipped a real product,
-          and led teams that made headlines.
+          Computer Info Systems @ MRU | President of Bissett Consulting Organization
         </motion.p>
 
         <motion.div
