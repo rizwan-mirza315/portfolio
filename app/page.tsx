@@ -19,6 +19,7 @@ const featured = [
     href: "https://faithfeeds.org",
     cta: "Explore Project",
     external: true,
+    logo: "/faith-feeds-logo.png",
   },
   {
     id: "bco",
@@ -31,6 +32,7 @@ const featured = [
     href: "https://bissettconsulting.com",
     cta: "View Case Study",
     external: true,
+    logo: "/bco-logo.png",
   },
   {
     id: "ahl",
@@ -43,6 +45,7 @@ const featured = [
     href: "https://ahl-ten.vercel.app/",
     cta: "Explore Project",
     external: true,
+    logo: "/ahl-logo-v2.png",
   },
 ];
 
@@ -110,6 +113,11 @@ export default function Home() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
+              {project.logo && (
+                <div className={styles.cardLogo}>
+                  <Image src={project.logo} alt={project.name} fill style={{ objectFit: "contain", objectPosition: "left center" }} />
+                </div>
+              )}
               <p className={styles.cardCategory}>{project.category}</p>
               <h3 className={styles.cardName}>{project.name}</h3>
               <p className={styles.cardDesc}>{project.desc}</p>

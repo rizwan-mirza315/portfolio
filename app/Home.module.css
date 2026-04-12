@@ -103,6 +103,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 2rem;
+  margin-top: 2.5rem;
   margin-bottom: 5rem;
 }
 
@@ -210,6 +211,12 @@
 
 .featuredCard:hover {
   background: #131313;
+}
+
+.cardLogo {
+  position: relative;
+  width: 100%;
+  height: 5rem;
 }
 
 .cardCategory {
