@@ -363,7 +363,7 @@ export default function Portfolio() {
           </motion.div>
 
           {[
-            { title: "Software Development", items: projects.filter(p => ["bco","faith-feeds","ahl"].includes(p.id)) },
+            { title: "Software Development & Consulting", items: projects.filter(p => ["bco","faith-feeds","ahl"].includes(p.id)) },
             { title: "Business / Financial Analysis", items: projects.filter(p => ["distribution-dashboard","chipotle-capital","retirement-analysis"].includes(p.id)) },
           ].map((section) => (
             <section key={section.title} className={styles.section}>
