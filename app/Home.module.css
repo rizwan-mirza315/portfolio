@@ -34,6 +34,7 @@
   object-fit: cover;
   object-position: center top;
   opacity: 1;
+  filter: brightness(0.65);
 }
 
 .coverOverlay {
@@ -170,11 +171,11 @@
 }
 
 .featuredLabel {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 900;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #555;
+  color: #f0ede6;
   flex-shrink: 0;
 }
 
