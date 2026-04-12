@@ -60,9 +60,9 @@ export default function Home() {
         <div className={styles.coverOverlay} />
         <div className={styles.mainContent}>
           <h1 className={styles.heading}>
-            <ScrambleText text="RIZWAN" />
+            <ScrambleText text="RIZWAN" charStyles={{ 2: { color: "#e05555" } }} />
             <br />
-            <ScrambleText text="MIRZA." />
+            <ScrambleText text="MIRZA." charStyles={{ 3: { color: "#e05555" } }} />
           </h1>
 
           <motion.p

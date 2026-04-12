@@ -8,10 +8,12 @@ export default function ScrambleText({
   text,
   className,
   style,
+  charStyles,
 }: {
   text: string;
   className?: string;
   style?: React.CSSProperties;
+  charStyles?: Record<number, React.CSSProperties>;
 }) {
   const [display, setDisplay] = useState(text);
 
@@ -40,9 +42,21 @@ export default function ScrambleText({
     return () => clearInterval(id);
   }, [text]);
 
+  if (!charStyles) {
+    return (
+      <span className={className} style={style}>
+        {display}
+      </span>
+    );
+  }
+
   return (
     <span className={className} style={style}>
-      {display}
+      {display.split("").map((char, i) => (
+        <span key={i} style={charStyles[i]}>
+          {char}
+        </span>
+      ))}
     </span>
   );
 }
