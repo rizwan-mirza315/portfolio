@@ -8,6 +8,27 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 export const metadata: Metadata = {
   title: "Rizwan Mirza",
   description: "Builder. Leader. Developer.",
+  openGraph: {
+    title: "Rizwan Mirza",
+    description: "Building digital products & leading real consulting engagements.",
+    url: "https://rizwan-mirza.xyz",
+    siteName: "Rizwan Mirza",
+    images: [
+      {
+        url: "https://rizwan-mirza.xyz/new-cover-pic.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Rizwan Mirza",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Rizwan Mirza",
+    description: "Building digital products & leading real consulting engagements.",
+    images: ["https://rizwan-mirza.xyz/new-cover-pic.jpg"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
